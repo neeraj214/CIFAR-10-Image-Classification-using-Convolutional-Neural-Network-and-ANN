@@ -14,13 +14,26 @@ CLASS_NAMES = ['airplane', 'automobile', 'bird', 'cat', 'deer',
 
 def load_data_and_models():
     print("Loading test data...")
-    X_test_flat = np.load(os.path.join(PROCESSED_DIR, 'X_test_flat.npy'))
-    X_test_cnn = np.load(os.path.join(PROCESSED_DIR, 'X_test_cnn.npy'))
-    y_test = np.load(os.path.join(PROCESSED_DIR, 'y_test.npy'))
+    files = {
+        'X_test_flat': os.path.join(PROCESSED_DIR, 'X_test_flat.npy'),
+        'X_test_cnn': os.path.join(PROCESSED_DIR, 'X_test_cnn.npy'),
+        'y_test': os.path.join(PROCESSED_DIR, 'y_test.npy'),
+        'ann_model': os.path.join(MODELS_DIR, 'ann_model.h5'),
+        'cnn_model': os.path.join(MODELS_DIR, 'cnn_multiscale.h5')
+    }
+    
+    for name, path in files.items():
+        if not os.path.exists(path):
+            print(f"Error: {path} not found. Please run the preprocessing and training scripts first.")
+            return None, None, None, None, None
+
+    X_test_flat = np.load(files['X_test_flat'])
+    X_test_cnn = np.load(files['X_test_cnn'])
+    y_test = np.load(files['y_test'])
 
     print("Loading models...")
-    ann_model = load_model(os.path.join(MODELS_DIR, 'ann_model.h5'))
-    cnn_model = load_model(os.path.join(MODELS_DIR, 'cnn_multiscale.h5'))
+    ann_model = load_model(files['ann_model'])
+    cnn_model = load_model(files['cnn_model'])
     
     return X_test_flat, X_test_cnn, y_test, ann_model, cnn_model
 
@@ -36,7 +49,8 @@ def save_misclassified_results(model_name, x_data, x_images, y_true_classes, mod
     
     # 1. Plot first 10 misclassified samples
     plt.figure(figsize=(15, 6))
-    for i in range(10):
+    num_to_plot = min(10, len(misclassified_idx))
+    for i in range(num_to_plot):
         idx = misclassified_idx[i]
         plt.subplot(2, 5, i + 1)
         plt.imshow(x_images[idx])
@@ -68,6 +82,8 @@ def save_misclassified_results(model_name, x_data, x_images, y_true_classes, mod
 def run_analysis():
     # Load data and models
     X_test_flat, X_test_cnn, y_test, ann_model, cnn_model = load_data_and_models()
+    if X_test_flat is None:
+        return
     y_test_classes = np.argmax(y_test, axis=1)
     
     # Use CNN test set for image display (unflattened)
