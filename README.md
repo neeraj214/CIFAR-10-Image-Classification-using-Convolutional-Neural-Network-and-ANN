@@ -32,7 +32,8 @@ Refer to [project_structure.md](project_structure.md) for the complete directory
    ```
 
 ## 🚀 Workflow
-Follow these steps in order to reproduce the results:
+> [!IMPORTANT]
+> Follow these steps **sequentially**. Evaluation scripts (Steps 5-7) require the models and metrics generated in the previous steps.
 
 1. **Data Exploration:**
    ```bash
