@@ -7,7 +7,11 @@ METRICS_DIR = os.path.join('outputs', 'metrics')
 PLOTS_DIR = os.path.join('outputs', 'plots')
 
 def load_history(filename):
-    with open(os.path.join(METRICS_DIR, filename), 'r') as f:
+    path = os.path.join(METRICS_DIR, filename)
+    if not os.path.exists(path):
+        print(f"Error: {path} not found. Please run the training scripts first.")
+        return None
+    with open(path, 'r') as f:
         return json.load(f)
 
 def plot_training_curves():
@@ -15,6 +19,9 @@ def plot_training_curves():
     print("Loading training histories...")
     ann_history = load_history('ann_history.json')
     cnn_history = load_history('cnn_history.json')
+
+    if ann_history is None or cnn_history is None:
+        return
 
     # 2. Plot 2x2 subplot figure
     print("Generating training curves...")
