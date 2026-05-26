@@ -16,13 +16,26 @@ CLASS_NAMES = ['airplane', 'automobile', 'bird', 'cat', 'deer',
 
 def load_data_and_models():
     print("Loading test data...")
-    X_test_flat = np.load(os.path.join(PROCESSED_DIR, 'X_test_flat.npy'))
-    X_test_cnn = np.load(os.path.join(PROCESSED_DIR, 'X_test_cnn.npy'))
-    y_test = np.load(os.path.join(PROCESSED_DIR, 'y_test.npy'))
+    files = {
+        'X_test_flat': os.path.join(PROCESSED_DIR, 'X_test_flat.npy'),
+        'X_test_cnn': os.path.join(PROCESSED_DIR, 'X_test_cnn.npy'),
+        'y_test': os.path.join(PROCESSED_DIR, 'y_test.npy'),
+        'ann_model': os.path.join(MODELS_DIR, 'ann_model.h5'),
+        'cnn_model': os.path.join(MODELS_DIR, 'cnn_multiscale.h5')
+    }
+    
+    for name, path in files.items():
+        if not os.path.exists(path):
+            print(f"Error: {path} not found. Please run the preprocessing and training scripts first.")
+            return None, None, None, None, None
+
+    X_test_flat = np.load(files['X_test_flat'])
+    X_test_cnn = np.load(files['X_test_cnn'])
+    y_test = np.load(files['y_test'])
 
     print("Loading models...")
-    ann_model = load_model(os.path.join(MODELS_DIR, 'ann_model.h5'))
-    cnn_model = load_model(os.path.join(MODELS_DIR, 'cnn_multiscale.h5'))
+    ann_model = load_model(files['ann_model'])
+    cnn_model = load_model(files['cnn_model'])
     
     return X_test_flat, X_test_cnn, y_test, ann_model, cnn_model
 
@@ -39,6 +52,8 @@ def get_metrics(y_true, y_pred):
 def plot_and_evaluate():
     # 1. Load data and models
     X_test_flat, X_test_cnn, y_test, ann_model, cnn_model = load_data_and_models()
+    if X_test_flat is None:
+        return
     y_test_classes = np.argmax(y_test, axis=1)
 
     # 2. Get predictions
