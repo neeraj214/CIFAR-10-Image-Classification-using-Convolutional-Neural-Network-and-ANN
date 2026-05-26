@@ -9,7 +9,7 @@
 This repository contains a comprehensive deep comparison between **Convolutional Neural Networks (CNN)** and **Artificial Neural Networks (ANN)** using the **CIFAR-10** image classification dataset.
 
 ## 📌 Project Overview
-The goal of this project is to evaluate and compare the performance, accuracy, and efficiency of two different neural network architectures on the same image classification task.
+The goal of this project is to evaluate and compare the performance, accuracy, and efficiency of two different neural network architectures on the same image classification task. The comparison includes training curves, confusion matrices, and analysis of misclassified samples.
 
 ## 🏗️ Folder Structure
 Refer to [project_structure.md](project_structure.md) for the complete directory layout.
@@ -32,12 +32,48 @@ Refer to [project_structure.md](project_structure.md) for the complete directory
    ```
 
 ## 🚀 Workflow
-1. **Data Exploration:** Run `python src/data_exploration.py` to see dataset insights.
-2. **Preprocessing:** Run `python src/preprocess.py` to prepare data for models.
+Follow these steps in order to reproduce the results:
+
+1. **Data Exploration:**
+   ```bash
+   python src/data_exploration.py
+   ```
+   *Analyzes dataset distribution and generates sample grids.*
+
+2. **Preprocessing:**
+   ```bash
+   python src/preprocess.py
+   ```
+   *Normalizes, encodes, and flattens data for model inputs.*
+
+3. **Train ANN Model:**
+   ```bash
+   python src/ann_model.py
+   ```
+   *Trains a 3-hidden layer Artificial Neural Network.*
+
+4. **Train CNN Model:**
+   ```bash
+   python src/cnn_multiscale.py
+   ```
+   *Trains a Multiscale Convolutional Neural Network (3x3, 5x5, 7x7 kernels).*
+
+5. **Generate Evaluation Plots:**
+   ```bash
+   python src/plot_curves.py
+   python src/plot_confusion.py
+   ```
+   *Generates training curves, validation comparisons, and confusion matrices.*
+
+6. **Error Analysis:**
+   ```bash
+   python src/misclassified.py
+   ```
+   *Visualizes samples that the models failed to classify correctly.*
 
 ## 📊 Technologies Used
 - **Deep Learning:** TensorFlow, Keras
-- **Data Analysis:** NumPy, Pandas
+- **Data Analysis:** NumPy, Scikit-learn
 - **Visualization:** Matplotlib, Seaborn
 - **Environment:** Jupyter Notebook
 
