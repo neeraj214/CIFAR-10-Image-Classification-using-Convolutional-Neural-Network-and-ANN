@@ -1,82 +1,87 @@
-# CIFAR-10 CNN vs ANN Deep Comparison 🚀
+# CIFAR-10 CNN vs ANN: Deep Learning Performance Comparison 🚀
 
-[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.15.0-FF6F00?style=flat&logo=tensorflow)](https://www.tensorflow.org/)
-[![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=flat&logo=python)](https://www.python.org/)
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![Keras](https://img.shields.io/badge/Keras-Deep%20Learning-D00000?style=flat&logo=keras)](https://keras.io/)
-[![Status](https://img.shields.io/badge/Status-In%20Progress-yellow.svg)]()
+[![Python](https://img.shields.io/badge/Python-3.10-3776AB?style=flat&logo=python)](https://www.python.org/)
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.15-FF6F00?style=flat&logo=tensorflow)](https://tensorflow.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.104-009688?style=flat&logo=fastapi)](https://fastapi.tiangolo.com/)
+[![React](https://img.shields.io/badge/React-18.2-61DAFB?style=flat&logo=react)](https://reactjs.org/)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.3-38B2AC?style=flat&logo=tailwind-css)](https://tailwindcss.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This repository contains a comprehensive deep comparison between **Convolutional Neural Networks (CNN)** and **Artificial Neural Networks (ANN)** using the **CIFAR-10** image classification dataset.
+A comprehensive full-stack project comparing the efficiency, accuracy, and spatial awareness of **Artificial Neural Networks (ANN)** versus **Convolutional Neural Networks (CNN)** using the CIFAR-10 dataset.
 
-## 📌 Project Overview
-The goal of this project is to evaluate and compare the performance, accuracy, and efficiency of two different neural network architectures on the same image classification task. The comparison includes training curves, confusion matrices, and analysis of misclassified samples.
+## 🏗️ Model Architectures
 
-## 🏗️ Folder Structure
-Refer to [project_structure.md](project_structure.md) for the complete directory layout.
+### **Artificial Neural Network (ANN)**
+A classic multi-layer perceptron (MLP) architecture focused on dense connectivity.
+- **Structure**: `Input(3072)` → `Dense(512)` → `Dense(256)` → `Dense(128)` → `Output(10)`
+- **Key Features**: Batch Normalization, Dropout (0.3), ReLU activation.
 
-- `src/`: Core Python scripts for data exploration, preprocessing, and training.
-- `data/`: Local storage for raw and processed datasets (ignored by git).
-- `models/`: Saved model architectures and weights.
-- `outputs/`: Visualization plots and performance metrics.
+### **Convolutional Neural Network (CNN)**
+A multiscale architecture designed to capture features at different spatial resolutions.
+- **Structure**: `Conv(3×3)` → `Conv(5×5)` → `Conv(7×7)` → `Flatten` → `Dense(256)` → `Output(10)`
+- **Key Features**: MaxPooling, Multiscale Kernels, Spatial Feature Extraction.
 
-## 🛠️ Installation & Setup
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/neeraj214/CIFAR-10-Image-Classification-using-Convolutional-Neural-Network-and-ANN.git
-   cd CIFAR-10-Image-Classification-using-Convolutional-Neural-Network-and-ANN
-   ```
+## 📊 Results Summary
 
-2. **Install dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
+| Model | Params | Accuracy | Training Time |
+| :--- | :--- | :--- | :--- |
+| **ANN** | ~1.7M | ... | ... |
+| **CNN** | ~0.8M | ... | ... |
 
-## 🚀 Workflow
-> [!IMPORTANT]
-> Follow these steps **sequentially**. Evaluation scripts (Steps 5-7) require the models and metrics generated in the previous steps.
+*Note: Results vary based on local training iterations. Run the evaluation scripts to update.*
 
-1. **Data Exploration:**
-   ```bash
-   python src/data_exploration.py
-   ```
-   *Analyzes dataset distribution and generates sample grids.*
+## 🛠️ Tech Stack
+- **Deep Learning**: TensorFlow, Keras
+- **Backend**: FastAPI, Uvicorn, Python
+- **Frontend**: React.js, Vite, Tailwind CSS, Recharts
+- **DevOps**: Docker, Git
 
-2. **Preprocessing:**
-   ```bash
-   python src/preprocess.py
-   ```
-   *Normalizes, encodes, and flattens data for model inputs.*
+## 🚀 Getting Started
 
-3. **Train ANN Model:**
-   ```bash
-   python src/ann_model.py
-   ```
-   *Trains a 3-hidden layer Artificial Neural Network.*
+### **1. Prerequisites**
+- Python 3.10+
+- Node.js & npm
 
-4. **Train CNN Model:**
-   ```bash
-   python src/cnn_multiscale.py
-   ```
-   *Trains a Multiscale Convolutional Neural Network (3x3, 5x5, 7x7 kernels).*
+### **2. Installation**
+```bash
+# Clone the repository
+git clone https://github.com/neeraj214/CIFAR-10-Image-Classification-using-Convolutional-Neural-Network-and-ANN.git
+cd CIFAR-10-Image-Classification-using-Convolutional-Neural-Network-and-ANN
 
-5. **Generate Evaluation Plots:**
-   ```bash
-   python src/plot_curves.py
-   python src/plot_confusion.py
-   ```
-   *Generates training curves, validation comparisons, and confusion matrices.*
+# Install Python dependencies
+pip install -r requirements.txt
+```
 
-6. **Error Analysis:**
-   ```bash
-   python src/misclassified.py
-   ```
-   *Visualizes samples that the models failed to classify correctly.*
+### **3. Execution Order**
+Follow these steps to train and evaluate:
+1. **Data Exploration**: `python src/data_exploration.py`
+2. **Preprocessing**: `python src/preprocess.py`
+3. **Train ANN**: `python src/ann_model.py`
+4. **Train CNN**: `python src/cnn_multiscale.py`
+5. **Final Metrics**: `python src/final_comparison.py`
 
-## 📊 Technologies Used
-- **Deep Learning:** TensorFlow, Keras
-- **Data Analysis:** NumPy, Scikit-learn
-- **Visualization:** Matplotlib, Seaborn
-- **Environment:** Jupyter Notebook
+### **4. Running the App**
+- **Backend**: 
+  ```bash
+  cd backend
+  uvicorn main:app --reload
+  ```
+- **Frontend**:
+  ```bash
+  cd frontend
+  npm install
+  npm run dev
+  ```
+
+## 🌐 Deployment
+- **Backend**: Hosted on [Render](https://render.com/) via `backend/Dockerfile`.
+- **Frontend**: Hosted on [Vercel](https://vercel.com/).
+
+🔗 **Live Demo**: [Coming Soon](https://github.com/neeraj214/CIFAR-10-Image-Classification-using-Convolutional-Neural-Network-and-ANN)
+
+## 👤 Author
+**neeraj214**  
+[GitHub](https://github.com/neeraj214) | [LinkedIn](https://www.linkedin.com/in/neeraj214/)
 
 ---
-Developed with ❤️ by [Neeraj](https://github.com/neeraj214)
+*Developed for deep learning performance analysis and educational purposes.*
