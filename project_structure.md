@@ -13,11 +13,4 @@ cifar10-cnn-vs-ann/
 ├── outputs/ 
 │   ├── plots/ 
 │   └── metrics/ 
-├── backend/ 
-├── frontend/ 
-│   └── src/ 
-│       ├── api/ 
-│       └── components/ 
-├── requirements.txt
-├── .gitignore
-└── README.md 
+knnlkn
