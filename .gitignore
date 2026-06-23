@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Environments
+.env
+venv/
+env/
+
+# Dependencies
+node_modules/
+
+# Models
+*.h5
+*.keras
+
+# Data
+data/processed/
+
+# IDEs
+.DS_Store
+.idea/
+.vscode/
+
+# Personal test files
+new.py
+noida.py
+
+# Explicitly allowed
+!outputs/*.json
+!outputs/*.png
+!README.md
